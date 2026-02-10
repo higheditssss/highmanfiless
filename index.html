@@ -20,6 +20,11 @@
             min-height: 100vh;
             overflow: hidden;
             user-select: none;
+            transition: opacity 2s ease-out;
+        }
+
+        body.fade-out {
+            opacity: 0;
         }
 
         .container {
@@ -110,31 +115,32 @@
         <h1>HIGHMAN FILES</h1>
         <div class="timer">
             <div class="time-box">
-                <span class="time-value" id="hours">24</span>
+                <span class="time-value" id="hours">05</span>
                 <span class="time-label">HOURS</span>
             </div>
             <div class="time-box">
-                <span class="time-value" id="minutes">59</span>
+                <span class="time-value" id="minutes">00</span>
                 <span class="time-label">MINUTES</span>
             </div>
             <div class="time-box">
-                <span class="time-value" id="seconds">59</span>
+                <span class="time-value" id="seconds">00</span>
                 <span class="time-label">SECONDS</span>
             </div>
         </div>
     </div>
 
-    <div class="footer-text">*adevarul*</div>
+    <div class="footer-text"></div>
 
     <div class="protection-overlay" id="protectionOverlay">
         <div class="warning-text">Închide Developer Tools pentru a continua</div>
     </div>
 
     <script>
-        // SETEAZĂ AICI DATA ȘI ORA EXACTĂ CÂND VREI SĂ EXPIRE
-        // Format: An, Lună (0-11), Zi, Oră, Minut, Secundă
-        // Exemplu: 10 Februarie 2026, ora 23:59:59
-        const endTime = new Date(2026, 1, 10, 23, 59, 59).getTime();
+        // DATA ȘI ORA FIXĂ CÂND EXPIRĂ TIMER-UL
+        // Timer-ul expiră pe: 10 Februarie 2026, ora 18:08:00 (6:08 PM)
+        // Același moment pentru TOȚI utilizatorii, indiferent când accesează pagina
+        
+        const endTime = new Date(2026, 1, 10, 18, 8, 0).getTime(); // Luna este 0-indexed (1 = Februarie)
 
         // Anti-debugging protection
         let devtoolsOpen = false;
@@ -207,8 +213,12 @@
             const remaining = endTime - now;
 
             if (remaining <= 0) {
-                // Redirect to troll page when timer expires
-                window.location.href = 'troll.html';
+                // Fade out smooth înainte de redirect
+                document.body.classList.add('fade-out');
+                setTimeout(() => {
+                    window.location.href = 'troll.html';
+                }, 2000); // Așteaptă 2 secunde pentru tranziție
+                clearInterval(timerInterval);
                 return;
             }
 
