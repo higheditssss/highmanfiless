@@ -115,11 +115,11 @@
         <h1>HIGHMAN FILES</h1>
         <div class="timer">
             <div class="time-box">
-                <span class="time-value" id="hours">06</span>
+                <span class="time-value" id="hours">00</span>
                 <span class="time-label">HOURS</span>
             </div>
             <div class="time-box">
-                <span class="time-value" id="minutes">00</span>
+                <span class="time-value" id="minutes">30</span>
                 <span class="time-label">MINUTES</span>
             </div>
             <div class="time-box">
@@ -136,11 +136,9 @@
     </div>
 
     <script>
-        // DATA ȘI ORA FIXĂ CÂND EXPIRĂ TIMER-UL
-        // Timer-ul expiră pe: 10 Februarie 2026, ora 19:20:00 (7:20 PM)
-        // Același moment pentru TOȚI utilizatorii, indiferent când accesează pagina
-        
-        const endTime = new Date(2026, 1, 10, 19, 20, 0).getTime(); // Luna este 0-indexed (1 = Februarie)
+        // DATĂ ȘI ORA FIXĂ CÂND EXPIRĂ TIMER-UL - ACEEAȘI PENTRU TOȚI
+        // Timer expiră exact la ora 17:40 (30 minute de la 17:10)
+        const endTime = new Date(2026, 1, 10, 17, 40, 0).getTime();
 
         // Anti-debugging protection
         let devtoolsOpen = false;
